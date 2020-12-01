@@ -18,20 +18,11 @@
     <ClCompile Include="src\SpaceShooterApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CollisionManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\World.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\SystemManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CollisionManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Components.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -44,13 +35,13 @@
     <ClInclude Include="src\World.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\ComponentHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="src\Systems.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\SystemManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ComponentHelper.h">
+    <ClInclude Include="src\ComponentArray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

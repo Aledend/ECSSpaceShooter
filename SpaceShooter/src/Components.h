@@ -6,7 +6,10 @@
 
 
 
-class Component { };
+class Component 
+{ 
+	//virtual ~Component() = default;
+};
 
 class Position : Component
 {

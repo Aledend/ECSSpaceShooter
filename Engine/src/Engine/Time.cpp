@@ -1,15 +1,17 @@
 #include "Time.h"
-#include "Time.h"
 
-Time::Time()
-{
-	time = 0.f;
-	deltaTime = 0.f;
-	currentTime = std::chrono::system_clock::now();
-}
+namespace Engine {
+	Time::Time()
+	{
+		time = 0.f;
+		deltaTime = 0.f;
+		currentTime = std::chrono::high_resolution_clock::now();
+	}
 
-void Time::Update()
-{
-	deltaTime = (std::chrono::system_clock::now() - currentTime).count();
-	currentTime = std::chrono::system_clock::now();
+	void Time::Update()
+	{
+		deltaCount = std::chrono::high_resolution_clock::now() - currentTime;
+		deltaTime = deltaCount.count();
+		currentTime = std::chrono::high_resolution_clock::now();
+	}
 }

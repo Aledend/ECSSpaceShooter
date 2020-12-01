@@ -9,6 +9,7 @@
 class SpaceShooter : public Engine::Application
 {
 public:
+	
 	SpaceShooter()
 	{
 
@@ -16,10 +17,13 @@ public:
 
 	~SpaceShooter()
 	{
-
+		delete world;
 	}
 
+	World* world;
+
 	void InitApplication() override {
+		Engine::Application::InitApplication();
 
 		std::cout << "vel: " << ComponentHelper::GetComponentID<Velocity>() << std::endl;
 		std::cout << "pos: " << ComponentHelper::GetComponentID<Position>() << std::endl;
@@ -27,14 +31,17 @@ public:
 		Entity player = Entity();
 		player.AddComponents<Position, Player, Velocity>();
 
-		World* world = new World();
+		std::cout << "creating world" << std::endl;
+		world = new World();
 
 
-		delete world;
+		
 	}
 
 	void Update() override {
 		Engine::Application::Update();
+		std::cout << "updating" << std::endl;
+		world->Update();
 	}
 
 private:

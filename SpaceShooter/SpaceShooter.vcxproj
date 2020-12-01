@@ -60,7 +60,7 @@
       <PreprocessorDefinitions>ENGINE_PLATFORM_WINDOWS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)Engine\src;</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -76,7 +76,7 @@
       <PreprocessorDefinitions>ENGINE_PLATFORM_WINDOWS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)Engine\src;</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -91,18 +91,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="src\SpaceShooterApp.cpp" />
-    <ClCompile Include="src\SystemManager.cpp" />
     <ClCompile Include="src\World.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CollisionManager.h" />
+    <ClInclude Include="src\ComponentArray.h" />
     <ClInclude Include="src\ComponentHelper.h" />
     <ClInclude Include="src\Components.h" />
     <ClInclude Include="src\CoreMinimal.h" />
     <ClInclude Include="src\Entity.h" />
-    <ClInclude Include="src\SystemManager.h" />
     <ClInclude Include="src\Systems.h" />
     <ClInclude Include="src\World.h" />
   </ItemGroup>
