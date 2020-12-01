@@ -1,16 +1,32 @@
 #pragma once
-#include "World.h"
+#include "CoreMinimal.h"
+#include <bitset>
+#include "ComponentHelper.h"
+class World;
 
 class System {
 public:
-	virtual ~System() {}
-	virtual void HandleLogic() {}
+	template<class ...RequiredComponents>
+	void SetMask();
+
+	virtual void HandleLogic(World* worldContext);
+protected:
+	std::bitset<MAX_COMPONENTS> componentMask;
 };
 
-class MoveBullet : System {
+
+class MoveBullets : public System {
 public:
-	void HandleLogic() override
-	{
-		//for(Entity e : worldContext->entities)
-	}
+	MoveBullets();
+
+
+	void HandleLogic(World* worldContext) override;
+
 };
+
+
+template<class ...RequiredComponents>
+inline void System::SetMask()
+{
+	(componentMask.set(ComponentHelper::GetComponentID<RequiredComponents>()), ...);
+}

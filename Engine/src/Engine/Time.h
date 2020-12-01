@@ -19,8 +19,8 @@ namespace Engine {
 		void Update();
 
 	private:
-		class std::chrono::high_resolution_clock::time_point currentTime;
-		class std::chrono::duration<float> deltaCount;
+		std::chrono::high_resolution_clock::time_point currentTime;
+		std::chrono::duration<float> deltaCount;
 
 	};
 

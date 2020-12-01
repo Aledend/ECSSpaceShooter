@@ -11,7 +11,7 @@ private:
 	inline static ecs_numeric componentCounter = 0;
 
 public:
-	template<class T, typename = std::enable_if_t<std::is_base_of_v<Component, T>>>
+	template<class ComponentType, typename = std::enable_if_t<std::is_base_of_v<Component, ComponentType>>>
 	static ecs_numeric GetComponentID()
 	{
 		

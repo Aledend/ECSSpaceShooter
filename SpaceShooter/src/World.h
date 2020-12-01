@@ -2,9 +2,10 @@
 #include "CoreMinimal.h"
 #include "Entity.h"
 #include "ComponentArray.h"
+#include "Components.h"
 #include "Systems.h"
 #include <vector>
-#include <string>
+#include <memory>
 
 class World {
 public:
@@ -13,8 +14,24 @@ public:
 
 	void Update();
 	Entity* GetEntities();
+
+	template<class ComponentType>
+	Component* GetComponents();
+
 private:
 	Entity entities[MAX_ENTITIES];
-	ComponentArray components[MAX_COMPONENTS];
-	std::basic_string<System> systems;
+	ComponentArray componentArray[MAX_COMPONENTS];
+	std::vector<std::unique_ptr<System>> systems;
 };
+
+//template<typename ComponentType>
+//inline Component* World::GetComponents()
+//{
+//	;
+//}
+
+template<class ComponentType>
+inline Component* World::GetComponents()
+{
+	return componentArray[ComponentHelper::GetComponentID<ComponentType>()].components;
+}

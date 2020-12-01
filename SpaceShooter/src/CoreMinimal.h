@@ -1,5 +1,6 @@
 #pragma once
 
-typedef int ecs_numeric;
-#define MAX_ENTITIES (ecs_numeric)32
-#define MAX_COMPONENTS (ecs_numeric)32
+using ecs_numeric = int;
+
+inline constexpr ecs_numeric MAX_ENTITIES = 32;
+inline constexpr ecs_numeric MAX_COMPONENTS = 32;

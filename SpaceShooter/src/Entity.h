@@ -10,47 +10,49 @@ class Entity {
 
 private:
 	std::bitset<MAX_COMPONENTS> components;
+	
 
 public:
-
-	/*Entity()
+	template<class ComponentType>
+	inline bool HasComponent() const
 	{
-
-	}*/
-
-	template<class T>
-	bool HasComponent() const
-	{
-		return this->components.test(ComponentHelper::GetComponentID<T>());
+		return components.test(ComponentHelper::GetComponentID<ComponentType>());
 	}
 
-	template<class... Args>
-	bool HasComponents() const
+	template<class... ComponentTypes>
+	inline bool HasComponents() const
 	{
-		return this->components.test(ComponentHelper::GetComponentID<Args...>());
+		std::bitset<32> compareMask;
+		(compareMask.set(ComponentHelper::GetComponentID<ComponentTypes>()), ...);
+		return (components & compareMask) == compareMask;
 	}
 
-	template<class T>
+	inline bool HasComponents(std::bitset<MAX_COMPONENTS> compareMask) const
+	{
+		return (components & compareMask) == compareMask;
+	}
+
+	template<class ComponentType>
 	inline void AddComponent()
 	{
-		this->components.set(ComponentHelper::GetComponentID<T>(), true);
+		components.set(ComponentHelper::GetComponentID<ComponentType>(), true);
 	}
 
-	template<class ...Args>
+	template<class ...ComponentTypes>
 	inline void AddComponents()
 	{
-		components.set((ComponentHelper::GetComponentID<Args>(), ...), true);
+		(components.set(ComponentHelper::GetComponentID<ComponentTypes>(), true), ...);
 	}
 
-	template<class T>
+	template<class ComponentType>
 	inline void RemoveComponent()
 	{
-		this->components.set(ComponentHelper::GetComponentID<T>(), false);
+		components.set(ComponentHelper::GetComponentID<ComponentType>(), false);
 	}
 
-	template<class... Args>
+	template<class... ComponentTypes>
 	inline void RemoveComponent()
 	{
-		this->components.set((ComponentHelper::GetComponentID<Args>(), ...), false);
+		(components.set(ComponentHelper::GetComponentID<ComponentTypes>(), false), ...);
 	}
 };

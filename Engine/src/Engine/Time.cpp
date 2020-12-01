@@ -1,4 +1,6 @@
 #include "Time.h"
+#include <thread>
+#include <chrono>
 
 namespace Engine {
 	Time::Time()
@@ -13,5 +15,9 @@ namespace Engine {
 		deltaCount = std::chrono::high_resolution_clock::now() - currentTime;
 		deltaTime = deltaCount.count();
 		currentTime = std::chrono::high_resolution_clock::now();
+		
+		using namespace std::chrono_literals;
+
+		std::this_thread::sleep_for(200ms);
 	}
 }
