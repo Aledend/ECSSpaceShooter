@@ -8,7 +8,6 @@ class System {
 public:
 	template<class ...RequiredComponents>
 	void SetMask();
-
 	virtual void HandleLogic(World* worldContext);
 protected:
 	std::bitset<MAX_COMPONENTS> componentMask;

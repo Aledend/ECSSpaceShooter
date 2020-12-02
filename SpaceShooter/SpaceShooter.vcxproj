@@ -104,6 +104,7 @@
     <ClInclude Include="src\Components.h" />
     <ClInclude Include="src\CoreMinimal.h" />
     <ClInclude Include="src\Entity.h" />
+    <ClInclude Include="src\EntityHelper.h" />
     <ClInclude Include="src\Systems.h" />
     <ClInclude Include="src\World.h" />
   </ItemGroup>

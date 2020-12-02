@@ -55,4 +55,9 @@ public:
 	{
 		(components.set(ComponentHelper::GetComponentID<ComponentTypes>(), false), ...);
 	}
+
+	inline void RemoveComponents()
+	{
+		components.reset();
+	}
 };

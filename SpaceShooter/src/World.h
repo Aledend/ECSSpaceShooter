@@ -6,6 +6,7 @@
 #include "Systems.h"
 #include <vector>
 #include <memory>
+#include <queue>
 
 class World {
 public:
@@ -13,25 +14,45 @@ public:
 	~World();
 
 	void Update();
-	Entity* GetEntities();
+	std::array<Entity, MAX_ENTITIES>& GetEntities();
 
 	template<class ComponentType>
-	Component* GetComponents();
+	ComponentType* GetComponents();
+
+	template<class ComponentType>
+	ComponentType* GetComponent(ecs_numeric EntityID);
+
+	template<class ...Components>
+	ecs_numeric CreateEntity();
+
+	void DestroyEntity(ecs_numeric entityID);
 
 private:
-	Entity entities[MAX_ENTITIES];
-	ComponentArray componentArray[MAX_COMPONENTS];
-	std::vector<std::unique_ptr<System>> systems;
+	std::vector<ecs_numeric> availableEntityIDs;
+	std::array<Entity, MAX_ENTITIES> entities;
+	ComponentArrays componentArrays;
+	std::vector<System*> systems;
 };
 
-//template<typename ComponentType>
-//inline Component* World::GetComponents()
-//{
-//	;
-//}
+template<class ComponentType>
+inline ComponentType* World::GetComponents()
+{
+	return componentArrays.GetComponentArray<ComponentType>();
+}
 
 template<class ComponentType>
-inline Component* World::GetComponents()
+inline ComponentType* World::GetComponent(ecs_numeric EntityID)
 {
-	return componentArray[ComponentHelper::GetComponentID<ComponentType>()].components;
+	return &GetComponents<ComponentType>()[EntityID];
+}
+
+template<class ...Components>
+inline ecs_numeric World::CreateEntity()
+{
+	ecs_numeric entityID = availableEntityIDs.back();
+	availableEntityIDs.pop_back();
+
+	entities[entityID].AddComponents<Components...>();
+
+	return entityID;
 }

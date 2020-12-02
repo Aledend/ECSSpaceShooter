@@ -19,6 +19,11 @@ class Velocity : public Component
 public:
 	float xVel;
 	float yVel;
+
+	void Reset() {
+		xVel = 0.f;
+		yVel = 0.f;
+	}
 };
 
 class Position : public Component
@@ -27,6 +32,16 @@ public:
 	Position();
 	float x;
 	float y;
+
+	void Reset() {
+		x = 0.f;
+		y = 0.f;
+	}
+
+	void Set(float _x, float _y) {
+		x = _x;
+		y = _y;
+	}
 };
 
 class Player : Component {};
