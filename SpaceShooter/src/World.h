@@ -7,10 +7,14 @@
 #include <vector>
 #include <memory>
 #include <queue>
+#include <map>
+
+struct SDL_Renderer;
+struct SDL_Window;
 
 class World {
 public:
-	World();
+	World(SDL_Renderer* renderer, SDL_Window* window, const Uint8* keyboard);
 	~World();
 
 	void Update();
@@ -27,11 +31,20 @@ public:
 
 	void DestroyEntity(ecs_numeric entityID);
 
+	
+private:
+	void SetupSystems();
+
 private:
 	std::vector<ecs_numeric> availableEntityIDs;
 	std::array<Entity, MAX_ENTITIES> entities;
 	ComponentArrays componentArrays;
 	std::vector<System*> systems;
+
+public:
+	SDL_Renderer* renderer;
+	SDL_Window* window;
+	const Uint8* keyboard;
 };
 
 template<class ComponentType>

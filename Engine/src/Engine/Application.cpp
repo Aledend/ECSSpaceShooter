@@ -35,6 +35,7 @@ namespace Engine {
 			}
 			SDL_SetRenderDrawColor(renderer, 0, 255, 255, 255);
 
+
 			isRunning = true;
 			return true;
 		}
@@ -44,20 +45,14 @@ namespace Engine {
 			std::cout << "Error. SDL couldn't be initialized." << std::endl;
 			return false;
 		}
+
+
 	}
 
 	void Application::HandleEvents()
 	{
-		SDL_Event event;
-		SDL_PollEvent(&event);
-		switch (event.type)
-		{
-		case SDL_QUIT:
-			isRunning = false;
-			break;
-		default:
-			break;
-		}
+		SDL_PumpEvents();
+		keyboard = SDL_GetKeyboardState(NULL);
 	}
 
 	void Application::InitApplication()
@@ -69,12 +64,6 @@ namespace Engine {
 		applicationTime.Update();
 
 		
-	}
-
-	void Application::Render()
-	{
-		SDL_RenderClear(renderer);
-		SDL_RenderPresent(renderer);
 	}
 
 	void Application::Clean()
@@ -91,12 +80,13 @@ namespace Engine {
 		}
 		SDL_Delay(300);
 
+		HandleEvents();
+
 		InitApplication();
 
 		while (isRunning) {
 			HandleEvents();
 			Update();
-			Render();
 		}
 
 		Clean();

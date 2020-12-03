@@ -2,6 +2,8 @@
 
 #include "Core.h"
 #include "Time.h"
+#include <cstdint>
+#include <SDL.h>
 
 struct SDL_Window;
 struct SDL_Renderer;
@@ -19,7 +21,10 @@ namespace Engine {
 		void HandleEvents();
 		virtual void InitApplication();
 		virtual void Update();
-		void Render();
+		/*virtual void RenderApplication();
+		void RenderBegin();
+		void RenderPresent();*/
+		//void Render();
 		void Clean();
 		bool IsRunning();
 
@@ -28,8 +33,11 @@ namespace Engine {
 	private:
 		bool isRunning;
 		Time applicationTime;
+
+	protected:
 		SDL_Window* window;
 		SDL_Renderer* renderer;
+		const Uint8* keyboard;
 	};
 
 	// To be defined in client

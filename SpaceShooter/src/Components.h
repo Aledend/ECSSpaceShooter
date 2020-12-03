@@ -1,10 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "SDL_image.h"
 
-
-//typedef int uint8_t;
-
-
+class World;
 
 class Component 
 { 
@@ -19,6 +17,11 @@ class Velocity : public Component
 public:
 	float xVel;
 	float yVel;
+
+	void Set(float xVel, float yVel) {
+		this->xVel = xVel;
+		this->yVel = yVel;
+	}
 
 	void Reset() {
 		xVel = 0.f;
@@ -38,9 +41,9 @@ public:
 		y = 0.f;
 	}
 
-	void Set(float _x, float _y) {
-		x = _x;
-		y = _y;
+	void Set(float x, float y) {
+		this->x = x;
+		this->y = y;
 	}
 };
 
@@ -51,9 +54,20 @@ class Enemy : Component {};
 class Bullet : Component {};
 
 class Sprite : Component {
-	// Sprite
+public:
+	~Sprite();
+	SDL_Texture* texture = nullptr;
+	SDL_Rect textureRect;
+	void SetTexture(World* worldContext, const char* filePath);
 };
 
 class CircleCollider : Component {
-
+public:
+	float radius;
+	void Set(float radius)
+	{
+		this->radius = radius;
+	}
 };
+
+class Keyboard : Component {};
