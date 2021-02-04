@@ -29,6 +29,8 @@ public:
 	template<class ...Components>
 	ecs_numeric CreateEntity();
 
+	Entity& GetEntity(ecs_numeric entityID);
+
 	void DestroyEntity(ecs_numeric entityID);
 
 	

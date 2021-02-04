@@ -11,7 +11,6 @@ public:
 		return worldContext->CreateEntity<Bullet, Position, Velocity, Sprite>();
 	}
 
-	// With sprite and stuff at the same time.
 	static inline ecs_numeric CreateBullet(World* worldContext)
 	{
 		ecs_numeric entityID = worldContext->CreateEntity<Bullet, Position, Velocity, Sprite>();

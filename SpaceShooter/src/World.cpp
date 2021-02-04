@@ -4,26 +4,28 @@
 #include "Engine/Time.h"
 #include "EntityHelper.h"
 #include "SDL.h"
+#include <numeric>
 
 
-World::World(SDL_Renderer* rend, SDL_Window* win, const Uint8* keyboard)
+
+
+
+
+World::World(SDL_Renderer* renderer, SDL_Window* window, const Uint8* keyboard)
 {
-	renderer = rend;
-	window = win;
+	this->renderer = renderer;
+	this->window = window;
 	this->keyboard = keyboard;
 
+	// Fill available entities with range [0...MAX_ENTITIES)
 	availableEntityIDs.reserve(MAX_ENTITIES);
-	for (ecs_numeric i = 0; i < MAX_ENTITIES; i++)
-	{
-		availableEntityIDs.push_back(i);
-	}
-
-
-	for (ecs_numeric i = 0; i < MAX_ENTITIES; i++) {
-		EntityHelper::CreatePlayer(this);
-	}
+	std::iota(availableEntityIDs.begin(), availableEntityIDs.end(), 0);
 
 	SetupSystems();
+
+	ecs_numeric entity = CreateEntity<Player, Position, Velocity, Sprite>();
+	GetComponent<Position>(entity)->Set(500.f, 500.f);
+	GetComponent<Velocity>(entity)->Set(10.f, 2.f);
 }
 
 World::~World()
@@ -42,19 +44,6 @@ void World::Update()
 	}
 }
 
-std::array<Entity, MAX_ENTITIES>& World::GetEntities()
-{
-	return entities;
-}
-
-
-void World::DestroyEntity(ecs_numeric entityID)
-{
-	entities[entityID].RemoveComponents();
-	availableEntityIDs.push_back(entityID);
-}
-
-
 void World::SetupSystems()
 {
 	//systems.push_back(new UpdateInput());
@@ -64,4 +53,22 @@ void World::SetupSystems()
 	// Setup last.
 	systems.push_back(new Render());
 }
+
+
+std::array<Entity, MAX_ENTITIES>& World::GetEntities()
+{
+	return entities;
+}
+
+Entity& World::GetEntity(ecs_numeric entityID)
+{
+	return GetEntities()[entityID];
+}
+
+void World::DestroyEntity(ecs_numeric entityID)
+{
+	entities[entityID].RemoveComponents();
+	availableEntityIDs.push_back(entityID);
+}
+
 

@@ -16,6 +16,18 @@ Position::Position()
 }
 
 
+void Position::Set(float x, float y)
+{
+	this->x = x;
+	this->y = y;
+}
+
+void Position::Reset()
+{
+	x = 0.f;
+	y = 0.f;
+}
+
 Sprite::~Sprite()
 {
 	if (texture != nullptr)
@@ -23,6 +35,18 @@ Sprite::~Sprite()
 		SDL_DestroyTexture(texture);
 		texture = nullptr;
 	}
+}
+
+void Velocity::Set(float xVel, float yVel)
+{
+	this->xVel = xVel;
+	this->yVel = yVel;
+}
+
+void Velocity::Reset()
+{
+	xVel = 0.f;
+	yVel = 0.f;
 }
 
 void Sprite::SetTexture(World* worldContext, const char* filePath)
@@ -47,4 +71,9 @@ void Sprite::SetTexture(World* worldContext, const char* filePath)
 	textureRect.x = 0;
 	textureRect.y = 0;
 
+}
+
+void CircleCollider::Set(float radius)
+{
+	this->radius = radius;
 }

@@ -8,7 +8,6 @@ class Component
 { 
 public:
 	Component();
-	//virtual ~Component() = default;
 };
 
 
@@ -18,15 +17,9 @@ public:
 	float xVel;
 	float yVel;
 
-	void Set(float xVel, float yVel) {
-		this->xVel = xVel;
-		this->yVel = yVel;
-	}
+	void Set(float xVel, float yVel);
 
-	void Reset() {
-		xVel = 0.f;
-		yVel = 0.f;
-	}
+	void Reset();
 };
 
 class Position : public Component
@@ -36,15 +29,10 @@ public:
 	float x;
 	float y;
 
-	void Reset() {
-		x = 0.f;
-		y = 0.f;
-	}
 
-	void Set(float x, float y) {
-		this->x = x;
-		this->y = y;
-	}
+	void Set(float x, float y);
+
+	void Reset(); 
 };
 
 class Player : Component {};
@@ -64,10 +52,7 @@ public:
 class CircleCollider : Component {
 public:
 	float radius;
-	void Set(float radius)
-	{
-		this->radius = radius;
-	}
+	void Set(float radius);
 };
 
 class Keyboard : Component {};
